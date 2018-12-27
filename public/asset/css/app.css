@@ -1,0 +1,267 @@
+body {
+    background-image: url(../Img/bg-batik.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+body>.container {
+    background-color: white;
+    padding: 0;
+}
+
+.go-to-top {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #ddd;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 10px;
+    z-index: 1;
+    line-height: 25px;
+    right: 50px;
+    border-radius: 20px 20px 0 0;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.go-to-top:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar-nav .nav-item a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    margin-bottom: -1px;
+    border-bottom: 1px solid #eee;
+    transition: background-color .5s linear;
+}
+
+.form-pencarian input {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    transition: background-color .5s;
+    width: 125px !important;
+}
+
+.brand-nhia {
+    font-family: 'Sofia', cursive;
+    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.item-troll {
+    height: 50px;
+    width: 150px;
+    padding: 5px;
+    background-image: url(../imgBarang/shopping-cart.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    left: -30px;
+}
+
+.item-troll-desc {
+    /* background-color: red; */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    font-weight: bold;
+    font-size: 12px;
+    padding-left: 60px;
+    line-height: normal;
+    margin-bottom: 5px;
+    text-shadow: -5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container.jumbotron {
+    background-color: white !important;
+}
+
+.img-jumbotron {
+    background-image: url(../Img/bg-batik.jpg);
+    margin-left: -17px;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.img-jumbotron::after {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -90px;
+    width: 200px;
+    height: 500px;
+    background-color: white;
+    /* background-color: red; */
+    transform: rotate(45deg)
+}
+
+.nav-item .form-pencarian {
+    margin-left: -10px !important;
+}
+
+.fts {
+    font-family: 'Inconsolata',
+    monospace;
+}
+
+.mge {
+    font-family: 'Bree Serif',
+    serif;
+}
+
+.sidebar-header {
+    color: #333;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 5px solid dodgerblue;
+}
+
+ul.sidebar li:not(.sidebar-header) {
+    border-bottom: 3px solid dodgerblue;
+}
+
+.btn-bla-bla {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    color: #eee;
+}
+
+.semua-produk-title {
+    font-weight: 100;
+    text-transform: uppercase;
+}
+h4.semua-produk-title {
+    position: relative;
+    overflow: hidden;
+}
+
+h4.semua-produk-title::after {
+    content: '';
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    right: -30px;
+    top: 0;
+    background-color: white;
+    transform: rotate(-45deg);
+}
+
+.ads {
+    background-color: skyblue;
+}
+
+.ads h2 {
+    color: #eee;
+}
+
+main .container {
+    margin-top: -20px ;
+    padding: 0;
+}
+
+.card-deck .card {
+    padding: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+.card-deck .card .semua-produk-img {
+    position: relative;
+    overflow: hidden;
+}
+
+img.card-img-top {
+    width: 95px;
+    height: 95px;
+}
+
+.card-deck .card .semua-produk-img::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.semua-produk-diskon {
+    position: absolute;
+    font-weight: 500;
+    font-size: 9px;
+    top: 0;
+    right: 0;
+    height: 40px;
+    width: 40px;
+    padding: 0 5px;
+    z-index: 2;
+    background-color: #128293;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    margin: 3px 3px 0 0;
+    letter-spacing: 2px;
+}
+
+.semua-produk .add-to-cart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 3;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.semua-produk .add-to-cart:hover {
+    opacity: 1;
+    transform: scale(1.15, 1.15);
+    transition: .5s;
+}
+
+.card-deck .card .semua-produk-img:hover::after {
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    z-index: -1;
+    transition: background-color .5s linear, z-index .5s linear;
+}
+
+.semua-produk .semua-produk-title-barang {
+    margin: 0 -20px;
+}
+
+
+b.semua-produk-harga {
+    color: #333;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #17A2B8 !important;
+    border: none;
+}
+
+@media screen and (max-width: 768px) {
+    .brand-nhia, .fts, .mge {
+        font-size: 22px;
+        display: inline-block;
+    }
+    
+    .col-item-troll {
+        left: 30px;
+    }
+}
