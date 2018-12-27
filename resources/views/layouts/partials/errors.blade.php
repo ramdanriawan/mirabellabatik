@@ -2,7 +2,7 @@
 <script>
         swal({
           position: 'center',
-          type: 'success',
+          type: 'error',
           title: "{{session()->get('errors')}}",
           showConfirmButton: false,
           timer: 1500

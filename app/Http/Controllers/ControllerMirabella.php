@@ -96,11 +96,14 @@ class ControllerMirabella extends Controller
 
         $pelanggan = new Pelanggan();
 
-        if($pelanggan->where('email', $email)->first() && $pelanggan->where('password', $password)->first())
+        // email
+        $result = $pelanggan->where('email', $email)->first();
+
+        if( $result->email == $request->email && $result->password == $request->password )
         {
-            return view('mirabellabatik.index')->with('success', "Berhasil Login");
+            return redirect('/');
         } else {
-            return back()->with('errors', "Gagal Login");
+            return back()->with('errors', "Email Atau Password Salah");
         }
 
     }

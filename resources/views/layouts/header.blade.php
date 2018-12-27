@@ -43,7 +43,7 @@
         <div class="bg-white container p-2">
             <div class="row">
                 <div class="col-sm-6 pl-4">
-                    <h2 class="brand-nhia">Mirabella Batik</h2>
+                    <h2 class="brand-nhia"><a href='/'>Mirabella Batik</a></h2>
                 </div>
                 <div class="col-item-troll col-sm-6 pr-4 d-sm-flex justify-content-end">
                     <div class="item-troll">

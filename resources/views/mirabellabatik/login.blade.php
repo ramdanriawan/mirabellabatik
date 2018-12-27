@@ -23,15 +23,6 @@
                         </div>
                     </div>
                 </div>
-                @if($errors->has('email'))
-                <div class="col-md-3">
-                    <div class="form-control-feedback">
-                        <span class="text-danger align-middle">
-                            <i class="fa fa-close"></i> {{ $errors->first('email') }}
-                        </span>
-                    </div>
-                </div>
-                @endif
             </div>
             <div class="row">
                 <div class="col-md-3"></div>
