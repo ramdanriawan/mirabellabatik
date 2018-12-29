@@ -69,10 +69,10 @@
         <div class="collapse navbar-collapse" id='navbarSupportedContent'>
             <ul class="navbar-nav nav-justified w-100">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Produk</a>
+                    <a class="nav-link" href="/">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profil</a>
+                    <a class="nav-link" href="/profile">Profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Informasi</a>
@@ -84,9 +84,9 @@
                     <a class="nav-link" href="/login" tabindex="-1" aria-disabled="true">Login</a>
                 </li>
                 <li class="nav-item">
-                    <form class="form-inline d-flex justify-content-center">
+                    <form class="form-inline d-flex justify-content-center" action="/search">
                         <div class="form-group form-pencarian">
-                            <input class="form-control form-control-sm mt-1" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control form-control-sm mt-1" type="search" name="q" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-light ml-1 btn-sm mt-1" type="submit">
                                 <i class="fas fa-search fa-xs"></i>
                             </button>

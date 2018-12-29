@@ -11,6 +11,7 @@
 |
 */
 
+
 // untuk halaman awal
 Route::get('/', 'ControllerMirabella@index');
 
@@ -21,3 +22,8 @@ Route::post('/loginCek', 'ControllerMirabella@loginCek');
 // untuk pelanggan
 Route::resource('/pelanggan', 'ControllerPelanggan');
 
+// untuk halaman pencarian
+Route::get('/search', 'ControllerSearch@index');
+
+// untuk halaman profile
+Route::get('/profile', 'ControllerProfile@index');
