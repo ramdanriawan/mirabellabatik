@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +39,7 @@
 @include('layouts.partials.success')
 @include('layouts.partials.errors')
 
-<div class="container">
+<div class="container position-relative">
     <header class="">
         <div class="bg-white container p-2">
             <div class="row">
@@ -48,18 +49,29 @@
                 <div class="col-item-troll col-sm-6 pr-4 d-sm-flex justify-content-end">
                     <div class="item-troll">
                         <div class="item-troll-desc text-info">
-                            User &nbsp; : Guest <br>
-                            Items : 0 Items <br>
-                            Biaya : Rp.0
+                        @php 
+                            $userTrollItems = $order_details2->where('order_id', '=', Cookie::get('order_id'))->get();
+                            $total_harga = null;
+                        @endphp
+                        
+                            @foreach($userTrollItems as $userTrollItem)
+                                @php 
+                                    $total_harga += ((($userTrollItem->produk->harga / 100) - $userTrollItem->produk->diskon) * 100) * $userTrollItem->jumlah;
+                                @endphp
+                            @endforeach
+
+                            {{ Auth::user()->name }}, {{ count($userTrollItems->toArray()) }} Items, Rp{{ number_format($total_harga, 2, ',', '.') }} <p>
+                            <a href="/home/checkout" class='text-info pt-2'><b>Checkout &rarr;</b></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+</div>
     
     <!-- navbar menu (class navbar-menu dipake dijquery) -->
-    <nav class="navbar-menu container navbar navbar-expand-lg navbar-light bg-info sticky-top">
+    <nav class="navbar-menu container navbar navbar-expand-lg navbar-light bg-info sticky-top py-1">
         <span></span>
         <button class="navbar-toggler bg-info" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,22 +84,19 @@
                     <a class="nav-link" href="/">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profil</a>
+                    <a class="nav-link" href="/home/profile">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Informasi</a>
+                    <a class="nav-link" href="/home/pembelian">Pembelian</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Akun Saya</a>
+                    <a class="nav-link" href="{{ Route('logout') }}"  onclick='return confirm("Anda Akan Logout?")'>Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login" tabindex="-1" aria-disabled="true">Login</a>
-                </li>
-                <li class="nav-item">
-                    <form class="form-inline d-flex justify-content-center" action="/search">
+                    <form class="form-inline d-flex justify-content-center" action="/home/search">
                         <div class="form-group form-pencarian">
-                            <input class="form-control form-control-sm mt-1" type="search" name="q" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-light ml-1 btn-sm mt-1" type="submit">
+                            <input class="form-control form-control-sm mt-1" type="search" name="q" placeholder="Search" aria-label="Search" value='{{ Request::get("q") }}'>
+                            <button class="btn btn-outline-light ml-1 btn-sm mt-2" type="submit">
                                 <i class="fas fa-search fa-xs"></i>
                             </button>
                         </div>
@@ -97,4 +106,3 @@
             
         </div>
     </nav>
-</div>

@@ -1,7 +1,7 @@
 @include('layouts.header')
 
 <div class="container p-5">
-    <form class="form-horizontal" role="form" method="POST" action="/pelanggan">
+    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
     	{{ csrf_field() }}
         <div class="row">
             <div class="col-md-3"></div>
@@ -56,29 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 field-label-responsive">
-                <label for="email">E-Mail Address</label>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
-                        <input type="text" name="email" class="form-control" id="email"
-                               placeholder="you@example.com" required autofocus value="{{ old("email") }}">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-control-feedback">
-                        <span class="text-danger align-middle">
-                            @if($errors->has('email'))
-                                <i class="fa fa-close"> {{ $errors->first('email') }}</i>
-                            @endif
-                        </span>
-                </div>
-            </div>
-        </div>
+        
         <div class="row">
             <div class="col-md-3 field-label-responsive">
                 <label for="email">Alamat</label>
@@ -97,6 +75,55 @@
                         <span class="text-danger align-middle">
                             @if($errors->has('alamat'))
                                 <i class="fa fa-close"> {{ $errors->first('alamat') }}</i>
+                            @endif
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="alamat">Kota</label> 
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-home"></i></div>
+                        <select name='kota_id' class='form-control' required>
+                            @foreach ($kotas as $kota) 
+                                <option value='{{ $kota->id }}'>{{ $kota->nama_kota }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            @if($errors->has('email'))
+                                <i class="fa fa-close"> {{ $errors->first('email') }}</i>
+                            @endif
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="email">E-Mail Address</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                        <input type="text" name="email" class="form-control" id="email"
+                               placeholder="you@example.com" required autofocus value="{{ old("email") }}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            @if($errors->has('email'))
+                                <i class="fa fa-close"> {{ $errors->first('email') }}</i>
                             @endif
                         </span>
                 </div>

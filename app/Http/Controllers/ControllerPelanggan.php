@@ -1,107 +1,55 @@
-<?php
-
+<?php 
 namespace App\Http\Controllers;
 
-use App\Pelanggan;
 use Illuminate\Http\Request;
+use App\Pelanggan;
+use App\Kota;
+use Illuminate\Support\Facades\Hash;
 
-class ControllerPelanggan extends Controller
+class ControllerPelanggan extends Controller 
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+   public function index()
+   {
+       $datas['pelanggans'] = Pelanggan::paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('pelanggan.create');
-    }
+       return view('admin.home.pelanggan.index', $datas);
+   }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        // 
-        $this->validate($request, [
-            'nama' => 'required|min:3',
-            'telpon' => 'required|digits_between:10,15|numeric',
-            'email' => 'required|email|min:5|unique:pelanggans,email',
-            'alamat' => 'required|min:30',
-            'password' => 'required|min:5|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'required|min:5'
-        ]);
+   public function tambah()
+   {
+       $datas['kotas'] = Kota::all();
 
-        // instansi object
-        $pelanggan = new Pelanggan();
+       return view('admin.home.pelanggan.tambah', $datas);
+   }
 
-        // insert ke database
-        $pelanggan->create([
-            'nama' => $request->nama,
+   public function tambahStore(Request $request)
+   {
+       $this->validate($request, [
+           'name' => 'required|min:3|max:30|string',
+           'telpon' => 'required|numeric|digits_between:10,13|unique:pelanggans,telpon',
+           'alamat' => 'required|string|max:255',
+           'kota_id' => 'required|integer|exists:kotas,id',
+           'email' => 'required|email|unique:pelanggans,email|max:255',
+           'password' => 'required|max:50|confirmed',
+       ]);
+
+        Pelanggan::create([
+            'name' => $request->name,
             'telpon' => $request->telpon,
-            'email'=> $request->email,
             'alamat' => $request->alamat,
-            'password' => $request->password
+            'kota_id' => $request->kota_id,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ])->save();
 
-        return redirect('/')->with('success', 'Berhasil meregistrasi user');
-    }
+        return back()->with('success', 'Berhasil Menambah Pelanggan');
+   }
+   
+   public function cari(Request $request)
+   {
+        $datas['pelanggans'] = Pelanggan::where('name', 'like', "%{$request->q}%")->paginate(10);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Pelanggan $pelanggan)
-    {
-        //
-    }
+        return view('admin.home.pelanggan.index', $datas);
+   }
+   
 }

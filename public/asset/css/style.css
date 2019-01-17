@@ -1,0 +1,89 @@
+
+@media print {
+    .hidePrint {
+        display: none;
+    }
+
+    body {
+        -webkit-print-color-adjust: exact;
+    }
+
+    .printLaporan {
+        -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
+        margin: 10px;
+    }
+
+    @page {
+        margin: 0;
+        size: auto;
+    }
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    margin-right: 5px;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+body{
+    background-image: url(/gambar/whatsappbackgroundimage.png);
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.printLaporan {
+    background-color: #EEEEEE;
+    padding: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px 5px 0 0;
+}
+
+.printLaporan table tbody {
+    background-color: white;
+}
+
+.printLaporanTitle {
+    padding: 20px;
+    background-color: #3ED55F;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+
+.printLaporanThead {
+    background-color: #3ED55F;
+    color: white;
+    padding: .75rem;
+}
+
+table th:first-child, table td:first-child {
+    text-align: center;
+    font-weight: bold;
+}
+
+.letterSpacing {
+    letter-spacing: 1px;
+}
+
+.tandaTangan {
+    float: right;
+    width: 110px;
+    height: 80px;
+    /* margin-right: -50px; */
+    margin-top: -20px;
+}

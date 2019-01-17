@@ -6,7 +6,7 @@
 </div>
 
 <div class="container">
-    <section class="mt-1">
+    <section class="mt-0">
         <div class="container jumbotron py-0">
             <div class="row position-relative">
                 <div class="col-sm-6 img-jumbotron">
@@ -27,276 +27,40 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <ul class="list-group sidebar mt-3">
-                        <li class="sidebar-header list-group-item d-flex justify-content-between align-items-center">
-                            SIDEBAR MENU
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Semua Produk
-                            <span class="badge badge-info badge-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Batik Keluarga
-                            <span class="badge badge-info badge-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Batik Pasangan
-                            <span class="badge badge-info badge-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Batik Wanita
-                            <span class="badge badge-info badge-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Batik Pria
-                            <span class="badge badge-info badge-pill">1</span>
-                        </li>
-                    </ul>
-
-                    <div class="ads mt-3 p-1 text-center">
-                        <h2 class="mb-4">Mirabella Batik Online</h2>
-                        <p>
-                        <a class="btn btn-bla-bla btn-lg" href='pelanggan/create'>Create New Account</a>
-                    </div>
+                    @include('layouts.sidebar')
                 </div>
-                <div class="col-sm-12 col-md-9 semua-produk  text-center mt-3">
-                    <h4 class="bg-info p-2 text-white semua-produk-title  mb-0">Semua Produk</h4>
-                    <div class="card-deck row pr-3 mb-3">
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju2.jpg" class="card-img-top" alt="...">
-                                <div class="semua-produk-diskon">
-                                    -50%
-                                </div>
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-2 bg-info text-white mb-2"><small>Barang bla balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class=" float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
+                <div class="col-sm-12 col-md-9 semua-produk  text-center my-5">
+                    <div class="container mb-4">
+                        <h4 class="bg-info p-2 text-white semua-produk-title  mb-3">
+                            {{ Request::segment(2) == '' ? 'SEMUA PRODUK' : strtoupper($jenis_kategori) }}
+                        </h4>
+                        <div class="row pr-4">
+                            @foreach($produks as $produk)
+                            <div class="col-md-3 col-sm-6">
+                                <div class="product-grid7">
+                                    <div class="product-image7">
+                                        <a href="#">
+                                            <img class="pic-1" src='{{ asset("asset/imgBarang/$produk->gambar") }}'>
+                                            <img class="pic-2" src='{{ asset("asset/imgBarang/$produk->gambar_belakang") }}'>
+                                        </a>
+                                        <ul class="social">
+                                            <li><a href="/home/produk/detail/{{$produk->id}}" class="fa fa-eye"></a></li>
+                                            <!-- <li><a href="" class="fa fa-shopping-cart"></a></li> -->
+                                        </ul>
+                                    </div>
+                                    <div class="product-content">
+                                        <h3 class="title"><a href="/home/produk/detail/{{$produk->id}}">{{ $produk->nama_produk }}</a></h3>
+                                        <div class="price">Rp{{ number_format(((($produk->harga / 100) - $produk->diskon) * 100), 2, ',', '.') }}
+                                            <span>Rp{{ number_format($produk->harga, 2, ',', '.') }}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 bg-info text-white mb-2"><small>Barang bla balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 bg-info text-white mb-2 text-capitalize"><small>Barang bla balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 text-capitalize bg-info text-white mb-2"><small>Barang bla balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
-
-                    <div class="card-deck mb-3 row pr-3">
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 bg-info text-white mb-2"><small>Barang bla balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="semua-produk-diskon">
-                                    -50%
-                                </div>
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 bg-info text-white mb-2 text-capitalize"><small>Barang bla
-                                        balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 text-capitalize bg-info text-white mb-2"><small>Barang bla
-                                        balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 text-capitalize bg-info text-white mb-2"><small>Barang bla
-                                        balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-deck mb-3 row pr-3">
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 bg-info text-white mb-2"><small>Barang bla balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="semua-produk-diskon">
-                                    -50%
-                                </div>
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 bg-info text-white mb-2 text-capitalize"><small>Barang bla
-                                        balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 text-capitalize bg-info text-white mb-2"><small>Barang bla
-                                        balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                        <div class="card col-sm-3">
-                            <div class="semua-produk-img">
-                                <img src="asset/imgBarang/baju1.jpg" class="card-img-top" alt="...">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-cart-plus fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="semua-produk-title-barang py-2 px-1 text-capitalize bg-info text-white mb-2"><small>Barang bla
-                                        balbabababbaba</small></h5>
-                                <p>
-                                    <b class="semua-produk-harga">Rp. 185.000</b>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted float-right"><a href='#' class="text-muted">View Detail</a></small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3 mr-3">
-                        <div class="col-12">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item " aria-current="page">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                    
-                        </div>
-                    </div>
+                    <hr>
+                    {{ $produks->links() }}
                 </div>
             </div>
         </div>

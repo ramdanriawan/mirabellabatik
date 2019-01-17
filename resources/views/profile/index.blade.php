@@ -1,151 +1,109 @@
 @include('layouts.header')
 
-<div class="container emp-profile p-5">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-sm btn-secondary">
-                                Change Photo
-                                <input type="file" name="file"/>
+<div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="card-title mb-4">
+                            <div class="d-flex justify-content-start">
+                                <div class="image-container"> 
+                                    <img src='{{ asset("asset/imgProfile/" . Auth()->user()->gambar) }}' class='float-left mr-2' id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                    <div class="userData ">
+                                        <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">{{ $pelanggan->name }}</a></h2>
+                                        <h6 class="d-block"><a href="javascript:void(0)"></a>{{ $pelanggan->telpon }}</h6>
+                                    </div>
+                                    <div class="middle pt-1" style='clear:both;'>
+                                        <form action="/home/profile/changephoto" method='post' enctype='multipart/form-data'>
+                                            @csrf
+                                            <div class="input-group mt-1" style='width: 38% !important;'>
+                                                <div class="custom-file">
+                                                    <input name='gambar' type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                                                    <label class="custom-file-label" for="inputGroupFile04">Choose</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04"><i class='fas fa-upload'></i></button>
+                                                </div>
+                                                @if ( $errors->has('gambar') || $errors->has('gambar_nama'))
+                                                    <p>
+                                                        <span class='text-danger'>{{ $errors->first('gambar') }} {{ $errors->first('gambar_nama') }}</span>
+                                                @endif 
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                                <div class="ml-auto">
+                                    <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                                    <h5>
-                                        Kshiti Ghelani
-                                    </h5>
-                                    <h6>
-                                        Web Developer and Designer
-                                    </h6>
-                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="btn btn-secondary" name="btnAddMore" value="Edit Profile"/>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <p>WORK LINK</p>
-                            <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Connected Services</a>
+                                    </li> -->
+                                </ul>
+                                <div class="tab-content ml-1" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>User Id</label>
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Alamat</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>Kshiti123</p>
+                                            <div class="col-md-8 col-6">
+                                                {{ $pelanggan->alamat }}
                                             </div>
                                         </div>
+                                        <hr />
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Name</label>
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Kota</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>Kshiti Ghelani</p>
+                                            <div class="col-md-8 col-6">
+                                                {{ $pelanggan->kota->nama_kota }}
                                             </div>
                                         </div>
+                                        <hr />
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Email</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>kshitighelani@gmail.com</p>
+                                            <div class="col-md-8 col-6">
+                                                {{ $pelanggan->email }}
                                             </div>
                                         </div>
+                                        <hr />
+
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Phone</label>
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Registrasi Pada</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>123 456 7890</p>
+                                            <div class="col-md-8 col-6">
+                                                {{ $pelanggan->created_at }}
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Profession</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
-                                            </div>
-                                        </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Experience</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Hourly Rate</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>10$/hr</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Total Projects</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>230</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>English Level</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Availability</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>6 months</p>
-                                            </div>
-                                        </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
+                                        <hr />
+
+                                    </div>
+                                    <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
+                                        Facebook, Google, Twitter Account that are connected to this account
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
+
                 </div>
-            </form>           
+            </div>
         </div>
+    </div>
 
 @include('layouts.footer')
