@@ -26,36 +26,6 @@ class ControllerMirabella extends Controller
         return view('mirabellabatik.index', $datas);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Mirabella $mirabella)
-    {
-        //
-    }
-
-    public function edit(Mirabella $mirabella)
-    {
-        //
-    }
-
-    public function update(Request $request, Mirabella $mirabella)
-    {
-        //
-    }
-
-    public function destroy(Mirabella $mirabella)
-    {
-        //
-    }
-
     public function produkKategori(Kategori $kategori)
     {
         $datas['produks'] = Produk::where('kategori_id', $kategori->id)->paginate(10);
@@ -78,7 +48,7 @@ class ControllerMirabella extends Controller
 
         if(count($datas['order_details']->toArray()) == 0)
         {
-            return back()->with('error', 'Belum ada item yang ditambahkan!');
+            return back()->with('error', 'Belum ada item yang ditambahkan!')->withCookie(Cookie::forget('order_id'));
         }
 
         return view('mirabellabatik.checkout', $datas);
@@ -118,6 +88,7 @@ class ControllerMirabella extends Controller
 
         return view('mirabellabatik.produkDetail', $datas);
     }
+
 
     public function produkOrder(Request $request, Produk $produk)
     { 
@@ -196,6 +167,23 @@ class ControllerMirabella extends Controller
         $datas['order_details'] = OrderDetail::where('order_id', '=', $order->id)->paginate(10);
 
         return view('mirabellabatik.produkOrderDetail', $datas);
+    }
+
+    // untuk cancel beberapa item yang telah diorder
+    public function produkOrderDetailCancel(Order $order, OrderDetail $orderdetail)
+    {
+        $data['namaBarang'] = $orderdetail->produk->nama_produk;
+
+        OrderDetail::find($orderdetail->id)->delete();
+
+        // jika semua item telah dihapus maka order dari tabel order juga akan dihapus
+        if ( count(OrderDetail::where('order_id', '=', $order->id)->get()) < 1 )
+        {
+            Order::find($order->id)->delete();
+            return redirect('/home')->with('success', 'Berhasil menghapus item ' . $data['namaBarang']);
+        }
+
+        return back()->with('success', 'Berhasil menghapus item ' . $data['namaBarang']);
     }
 
     public function pembelian()

@@ -66,7 +66,7 @@
                                     <td>{{ $produk->berat }}Kg</td>
                                     <td>{{ $produk->dibeli }}x</td>
                                     <td>{{ $produk->diskon }}%</td>
-                                    <td>{{ $produk->tggl_masuk }}%</td>
+                                    <td>{{ $produk->tggl_masuk }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

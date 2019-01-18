@@ -10,12 +10,12 @@
 
     .printLaporan {
         -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
-        margin: 10px;
+        height: 96vh;
     }
 
     @page {
-        margin: 0;
-        size: auto;
+        margin: 0cm;
+        size: A4 portrait;
     }
 }
 

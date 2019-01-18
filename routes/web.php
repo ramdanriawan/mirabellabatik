@@ -42,6 +42,9 @@ Route::prefix('home')->middleware('auth')->group(function(){
     // untuk halaman produk detail
     Route::get('/produk/detail/{produk}', 'ControllerMirabella@produkDetail');
     
+    //untuk membuat stok produk sesuai ukuran yang dipilih
+    Route::get('/produk/detail/{produk}/{ukuran_produk}/cekstok', 'ControllerMirabella@cekStok');
+
     // untuk mengatasi user yang order produk
     Route::get('/produk/{produk}/order', 'ControllerMirabella@produkOrder');
     
@@ -53,6 +56,9 @@ Route::prefix('home')->middleware('auth')->group(function(){
     
     // untuk melihat order detail
     Route::get('/produk/order/detail/{order}', 'ControllerMirabella@produkOrderDetail');
+
+    // untuk menangani user yang cancel beberapa item yang telah diorder
+    Route::get('/produk/order/detail/{order}/{orderdetail}/cancel', 'ControllerMirabella@produkOrderDetailCancel');
     
     // untuk mengatasi halaman pembelina
     Route::get('/pembelian', 'ControllerMirabella@pembelian');
@@ -162,6 +168,5 @@ Route::prefix('admin')->middleware('admin')->group(function() {
 });
 
 Route::get('/test', function(){
-    DB::table('admins')->update(['password' => '$2y$10$9wsBR19PvZHXjQo1PmFKe..J1Xkql8kv7I6U9YbeaZM4N1HnKxVFK']);
-    return Hash::check('admin', '$2y$10$9wsBR19PvZHXjQo1PmFKe..J1Xkql8kv7I6U9YbeaZM4N1HnKxVFK') ? 'sama': 'beda';
+    dd(DB::table('order_details')->where('order_id', '=', 18)->delete() === 0);
 });

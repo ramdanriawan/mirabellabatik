@@ -222,7 +222,7 @@ img {
                           <option value=''>-- Size --</option>
                           @foreach ( $produk->ukuran_produks as $ukuran_produk ) 
                             @if ( $ukuran_produk->stok !== 0)
-                              <option value='{{ $ukuran_produk->ukuran }}'>{{ $ukuran_produk->ukuran }}</option>
+                              <option value='{{ $ukuran_produk->ukuran }}'>{{ $ukuran_produk->ukuran }} (stok: {{ $ukuran_produk->stok }})</option>
                             @endif
                           @endforeach 
                         </select>
@@ -244,25 +244,14 @@ img {
                   <div class='col'>
                     
                     <div class='form-group'>
-                      <select name='jumlah' class='form-control' required>
-                        <option value=''>-- Jumlah --</option>
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                        <option value='6'>6</option>
-                        <option value='7'>7</option>
-                        <option value='8'>8</option>
-                        <option value='9'>9</option>
-                        <option value='10'>10</option>
-                      </select>
+                      <input name='jumlah' class='form-control' required placeholder="jumlah" min='0'>
                       @if ( $errors->has('jumlah') )
                       <div class='alert alert-danger'>
                           <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                         </div>
                     @endif
                     </div>
+
                   </div> 
                 </div>
               </div>
