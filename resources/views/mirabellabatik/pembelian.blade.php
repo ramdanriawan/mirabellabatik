@@ -66,8 +66,6 @@
                                     <form action='' onsubmit='return confirm("Yakin barang sudah diterima?!")'>
                                         <input type='hidden' name='urlTerimaBarang' value='/home/produk/order/terimabarang/{{ $order->id }}' />
                                         <input type='hidden' name='produk_id' value='' />
-
-                                        <div
                                     </form>
                                 </div>
                                 <div class="modal-footer">

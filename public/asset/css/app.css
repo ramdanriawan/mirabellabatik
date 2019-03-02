@@ -266,7 +266,7 @@ b.semua-produk-harga {
         font-size: 22px;
         display: inline-block;
     }
-    
+
     .col-item-troll {
         left: 30px;
     }
@@ -1973,4 +1973,13 @@ h3.h3 {
 
 .nav-link {
     margin-right: 5px !important;
+    color: white !important;
+}
+/*
+    * minta supaya ada tanda tangan di laporan
+    * minta supaya rownya sejajar
+    * minta supaya placeholder inputanny warna putih
+*/
+input.form-control.form-control-sm.mt-1::placeholder {
+    color: white;
 }

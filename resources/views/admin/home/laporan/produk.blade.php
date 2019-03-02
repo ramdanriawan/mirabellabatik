@@ -71,6 +71,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @include('layouts.laporan.tandaTangan')
                 </div>
             </div>
         </div>

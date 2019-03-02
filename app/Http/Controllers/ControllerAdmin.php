@@ -50,17 +50,6 @@ class ControllerAdmin extends Controller
 		return view('admin.home.profile', $datas);
 	}
 
-	public function loginCek()
-	{
-		return redirect('/admin/home');
-	}
-	
-	public function logout()
-	{
-
-		return redirect('/admin/login')->withCookie(Cookie::forget('adminsession'))->withCookie(Cookie::forget('adminid'));
-	}
-
 	public function profileUbah(Request $request)
 	{ 
 		$this->validate($request, [
@@ -86,4 +75,15 @@ class ControllerAdmin extends Controller
 
 		return redirect("/admin/login")->with('success', 'Berhasil merubah data admin')->withCookie(Cookie::forget('adminsession'))->withCookie(Cookie::forget('adminid'));
 	}
+
+	public function loginCek()
+	{
+        return redirect('/admin/home');
+	}
+	
+	public function logout()
+	{
+
+       return redirect('/admin/login')->withCookie(Cookie::forget('adminsession'))->withCookie(Cookie::forget('adminid'));
+    }
 }

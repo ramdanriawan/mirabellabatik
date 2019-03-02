@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    public function sendFailedLoginResponse(Request $request)
+    {
+        return redirect('/login')->with('error', 'Credentials Invalid!');
+    }
     /*
     |--------------------------------------------------------------------------
     | Login Controller

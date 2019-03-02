@@ -15,6 +15,7 @@
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">{{ $order_detail->produk->nama_produk }}x{{ $order_detail->jumlah }}</h6>
+                
                 <small class="text-muted">{{ $order_detail->produk->deskripsi }}</small>
 
                 <p>
@@ -23,12 +24,11 @@
                 > 
                   <b class='text-danger'><small>Remove</small></b> 
                 </a>
-
               </div>
-              <span class="text-muted">Rp{{ number_format((((($order_detail->produk->harga / 100) - $order_detail->produk->diskon) * 100)) * $order_detail->jumlah, 2, ',', '.') }}</span>
+              <span class="text-muted">Rp{{ number_format(($order_detail->produk->harga - ($order_detail->produk->harga / 100) * $order_detail->produk->diskon) * $order_detail->jumlah, 2, '.', ',') }}</span>
             </li>
 
-            @php $total_harga += (((($order_detail->produk->harga / 100) - $order_detail->produk->diskon) * 100) * $order_detail->jumlah); @endphp
+            @php $total_harga += ($order_detail->produk->harga - ($order_detail->produk->harga / 100) * $order_detail->produk->diskon)  * $order_detail->jumlah; @endphp
             @endforeach;
 
             <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -37,7 +37,6 @@
                 <small class="text-muted"><strong>Total</strong></small>
               </div>
               <strong class='text-success'>Rp{{ number_format($total_harga, 2, ',', '.') }}</strong>
-              
             </li>
           </ul>
 

@@ -1,7 +1,8 @@
-@extends('layouts.laporan.head')
+@include('layouts.laporan.head')
+{{-- <body style="background: white;"> --}}
 <body style="background: white;" onload='window.print(); window.close();'>
     <div class="container-fluid mt-2">
-        <div class="row justify-content-center">
+        <div class="row d-flex justify-content-center">
             <div class="col-md-8">
                 <div class="printLaporan">
                     <center class='printLaporanTitle'>
@@ -12,7 +13,7 @@
                             <i class="fas fa-truck-loading"></i> LAPORAN PENJUALAN
                             </h3>
                             <span>
-                                <i class="far fa-calendar-alt"></i> Periode / Tanggal {{ date('d-m-Y') }}
+                                <i class="far fa-calendar-alt"></i> Periode / Tanggal {{ $tggl_mulai }} sd {{ $tggl_akhir }}
                             </span>
                     </center>
 
@@ -67,7 +68,6 @@
                                 <td>Rp{{ number_format($order_detail_produk->jumlah * $harga_setelah_diskon, 2, ',', '.') }}</td>
                                 <td>{{ $order_detail_produk->produk->stok }}</td>
                                 <td>{{ $order_detail_produk->produk->diskon }}%</td>
-                                <td></td>
 
                                 @php
                                     $total_harga += $harga_setelah_diskon;
@@ -77,18 +77,19 @@
                             </tr>
                             @endforeach
                             @endforeach
-                            <tr>
-                                <td><strong>Total</strong></td>
-                                <td></td>
-                                <td></td>
-                                <td>Rp{{ number_format($total_harga, 2, ',', '.') }}</td>
-                                <td>{{ $jumlah }}</td>
-                                <td>Rp{{ number_format($total, 2, ',', '.') }}</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                                <tr>
+                                    <td class='no-border'><strong>Total</strong></td>
+                                    <td class='no-border'></td>
+                                    <td class='no-border'></td>
+                                    <td>Rp{{ number_format($total_harga, 2, ',', '.') }}</td>
+                                    <td>{{ $jumlah }}</td>
+                                    <td>Rp{{ number_format($total, 2, ',', '.') }}</td>
+                                    <td class='no-border'></td>
+                                    <td class='no-border'></td>
+                                </tr>
                         </tbody>
                     </table>
+                    @include('layouts.laporan.tandaTangan')
                 </div>
             </div>
         </div>

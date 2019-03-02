@@ -2,7 +2,7 @@
 
 <div class="container  justify-content-center d-flex py-5">
     <div class="row col-md-10">
-        <a href="/admin/home/order/tambah" class="btn btn-primary btn-xs mr-auto"><b>+</b> Add Order</a>
+        <!-- <a href="/admin/home/order/tambah" class="btn btn-primary btn-xs mr-auto"><b>+</b> Add Order</a> -->
         <form action="/admin/home/order/cari" method='get' class='ml-auto mb-2'>
             <input type="text" class="form-control" placeholder="Nama Pelanggan..." name='q' value='{{ old("q")}}'>
         </form>
@@ -45,6 +45,17 @@
                                 <td>
                                     <a class='btn btn-info btn-sm' href="/admin/home/order/ubah/{{ $order->id }}"><span class="fas fa-pen"></span> Edit</a>
                                 </td>
+                            @elseif ( $order->status_diterima === 'sudah' )
+                                <td>
+                                    <a class='btn btn-info btn-sm disabled' href="/admin/home/order/ubah/{{ $order->id }}" ><span class="fas fa-pen"></span> Edit</a>
+                                    <a class='btn btn-info btn-sm disabled' href="/admin/home/resi/tambah/{{ $order->id }}"  ><span class="fas fa-pen"></span> Input Resi</a>
+                                </td>
+
+                            @elseif ( $order->resi === null && $order->status_konfirmasi == "menunggu persetujuan")
+                                <td>
+                                    <a class='btn btn-info btn-sm' href="/admin/home/order/ubah/{{ $order->id }}"><span class="fas fa-pen"></span> Edit</a>
+                                </td>
+
                             @elseif ( $order->resi === null )
                                 <td>
                                     <a class='btn btn-info btn-sm' href="/admin/home/order/ubah/{{ $order->id }}"><span class="fas fa-pen"></span> Edit</a>

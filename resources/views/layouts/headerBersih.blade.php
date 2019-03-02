@@ -35,8 +35,8 @@
 </head>
 <body>
 
-@include('layouts.admin.partials.success')
-@include('layouts.admin.partials.errors')
+@include('layouts.partials.success')
+@include('layouts.partials.errors')
 
 <div class="container position-relative">
     <header class="">
@@ -58,21 +58,38 @@
         </div>
     </header>
     
-    <!-- navbar menu (class navbar-menu dipake dijquery) -->
-    <nav class="navbar-menu container navbar navbar-expand-lg navbar-light bg-info sticky-top">
-        <span></span>
-        <button class="navbar-toggler bg-info" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id='navbarSupportedContent'>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-            </ul>
-            
-        </div>
-    </nav>
 </div>
+
+<!-- navbar menu (class navbar-menu dipake dijquery) -->
+<nav class="navbar-menu container navbar navbar-expand-lg navbar-light bg-info sticky-top position-sticky-top">
+    <span></span>
+    <button class="navbar-toggler bg-info" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id='navbarSupportedContent'>
+        <ul class="navbar-nav w-100 d-flex justify-content-between">
+        <li class="nav-item active ml-3">
+                <a class="nav-link" href="/home">Produk</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="/about" class="nav-link">Profile Toko</a>
+            </li>
+            <li class="nav-item mr-3">
+                <form class="form-inline d-flex justify-content-center" action="/home/search">
+                    <div class="form-group form-pencarian">
+                        <input class="form-control form-control-sm mt-1" type="search" name="q" placeholder="Search" aria-label="Search" value='{{ Request::get("q") }}'>
+                        <button class="btn btn-outline-light ml-1 btn-sm mt-2" type="submit">
+                            <i class="fas fa-search fa-xs"></i>
+                        </button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+        
+    </div>
+</nav>

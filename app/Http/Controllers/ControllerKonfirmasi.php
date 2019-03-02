@@ -24,4 +24,11 @@ class ControllerKonfirmasi extends Controller
 
         return back()->with('success', 'Berhasil Menyetujui Konfirmasi Dari ' . $konfirmasi->pelanggan->name);
     }
+
+    public function cari(Request $request)
+    {
+        $datas['konfirmasis'] = Konfirmasi::where('nama_pengirim', 'like', "%$request->q%")->paginate(10);
+
+        return view('admin.home.konfirmasi.index', $datas);
+    }
 }

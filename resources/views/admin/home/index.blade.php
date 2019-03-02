@@ -51,7 +51,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-green" style="border-radius: 50%>
             <div class="inner">
               <h3>{{ count($banks) }}</h3>
 
@@ -152,7 +152,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="/home/admin/order" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="/admin/home/order" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -189,7 +189,7 @@
         </div>
         
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
+        {{-- <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
@@ -202,7 +202,7 @@
             </div>
             <a href="/admin/home/ulasan" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
+        </div> --}}
         
         <!-- ./col -->
       </div>

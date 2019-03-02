@@ -10,15 +10,17 @@
 
     .printLaporan {
         -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
-        height: 96vh;
+        height: auto;
     }
 
     @page {
         margin: 0cm;
+        width: 100%;
         size: A4 portrait;
     }
-}
 
+}
+/*
 .btn-circle {
     width: 30px;
     height: 30px;
@@ -37,7 +39,7 @@
     border-radius: 50%;
     font-size: 24px;
     line-height: 1.33;
-}
+} */
 
 body{
     background-image: url(/gambar/whatsappbackgroundimage.png);
@@ -54,9 +56,6 @@ body{
     border-radius: 5px 5px 0 0;
 }
 
-.printLaporan table tbody {
-    background-color: white;
-}
 
 .printLaporanTitle {
     padding: 20px;
@@ -65,16 +64,6 @@ body{
     border-radius: 5px 5px 0 0;
 }
 
-.printLaporanThead {
-    background-color: #3ED55F;
-    color: white;
-    padding: .75rem;
-}
-
-table th:first-child, table td:first-child {
-    text-align: center;
-    font-weight: bold;
-}
 
 .letterSpacing {
     letter-spacing: 1px;
@@ -87,3 +76,55 @@ table th:first-child, table td:first-child {
     /* margin-right: -50px; */
     margin-top: -20px;
 }
+
+/*
+    * minta supaya ada tanda tangan di laporan
+    * minta supaya rownya sejajar
+    * minta supaya placeholder inputanny warna putih
+*/
+
+table thead tr th div.printLaporanThead {
+    background-color: #3ED55F;
+    color: white;
+    padding: .75rem;
+}
+
+table tbody, tr {
+    background-color: white;
+}
+/*
+table, table thead, table tbody {
+    display: block;
+}
+
+table thead,
+table tbody {
+    padding: 10px;
+}
+
+table thead {
+    background-color: #3ED55F
+}
+
+table thead tr, table tbody tr {
+    display: flex;
+    justify-content: space-between;
+} */
+
+table thead tr th:first-child, table tbody tr td:first-child {
+    text-align: center;
+    font-weight: bold;
+}
+
+.no-border {
+    border: 0px solid white !important;
+}
+/*
+table thead tr th, table tbody tr td {
+    width: 100%;
+}
+
+
+table tbody tr td:not(:first-child) {
+    text-align: center;
+} */

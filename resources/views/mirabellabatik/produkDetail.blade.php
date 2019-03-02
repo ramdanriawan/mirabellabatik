@@ -1,4 +1,8 @@
-@include('layouts.header')
+@if ( auth()->guard()->check() )
+    @include('layouts.header')
+@else 
+    @include('layouts.headerBersih')
+@endif
 
 <style>
 
@@ -206,11 +210,11 @@ img {
                 @endforeach
                 </span>
 						</h5>
-						<h5 class="colors">colors:
+						{{-- <h5 class="colors">colors:
 							<span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
 							<span class="color green"></span>
 							<span class="color blue"></span>
-						</h5>
+						</h5> --}}
 
 						<div class="action">
                 <div class='row'>
@@ -222,7 +226,7 @@ img {
                           <option value=''>-- Size --</option>
                           @foreach ( $produk->ukuran_produks as $ukuran_produk ) 
                             @if ( $ukuran_produk->stok !== 0)
-                              <option value='{{ $ukuran_produk->ukuran }}'>{{ $ukuran_produk->ukuran }} (stok: {{ $ukuran_produk->stok }})</option>
+                              <option value='{{ $ukuran_produk->ukuran }}'>{{ $ukuran_produk->ukuran }}</option>
                             @endif
                           @endforeach 
                         </select>
@@ -244,14 +248,25 @@ img {
                   <div class='col'>
                     
                     <div class='form-group'>
-                      <input name='jumlah' class='form-control' required placeholder="jumlah" min='0'>
+                      <select name='jumlah' class='form-control' required>
+                        <option value=''>-- Jumlah --</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                        <option value='6'>6</option>
+                        <option value='7'>7</option>
+                        <option value='8'>8</option>
+                        <option value='9'>9</option>
+                        <option value='10'>10</option>
+                      </select>
                       @if ( $errors->has('jumlah') )
                       <div class='alert alert-danger'>
                           <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                         </div>
                     @endif
                     </div>
-
                   </div> 
                 </div>
               </div>

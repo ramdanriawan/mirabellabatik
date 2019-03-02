@@ -1,3 +1,4 @@
+ 
 @if(session()->has('error'))
 <script>
         swal({

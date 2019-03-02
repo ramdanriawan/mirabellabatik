@@ -4,7 +4,7 @@
 Auth::routes();
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('/home');
 });
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
@@ -12,22 +12,33 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 // untuk menangai pengiriman email
 Route::post('mail', 'ControllerMail@send');
 
-// untuk menangani halaman privacy
-// Route::get('/privacy', 'ControllerMirabella@privacy');
+// untuk menangani halaman about
 Route::get('/about', 'ControllerMirabella@about');
 
-// user yang sudah login akan diarahkan kesini
-Route::prefix('home')->middleware('auth')->group(function(){
+// untuk menangani halaman developer
+Route::get('/developer', 'ControllerMirabella@developer');
+
+// untuk user yang belum login
+Route::prefix('home')->group(function(){
     // untuk halaman awal
     Route::get('/', 'ControllerMirabella@index');
-    
+
     // untuk halaman produk berdasarkan kategori
     Route::get('/kategori/{kategori}', 'ControllerMirabella@produkKategori');
-    
+
     // untuk halaman pencarian
     Route::get('/search', 'ControllerSearch@index');
     Route::post('/search/filter', 'ControllerSearch@filter');
     
+    // untuk halaman produk detail
+    Route::get('/produk/detail/{produk}', 'ControllerMirabella@produkDetail');
+
+    // untuk mengatasi user yang order produk
+    Route::get('/produk/{produk}/order', 'ControllerMirabella@produkOrder');
+});
+
+// user yang sudah login akan diarahkan kesini
+Route::prefix('home')->middleware('auth')->group(function(){
     // untuk halaman profile
     Route::get('/profile', 'ControllerProfile@index');
     Route::post('/profile/changephoto', 'ControllerProfile@changephoto');
@@ -39,15 +50,6 @@ Route::prefix('home')->middleware('auth')->group(function(){
     Route::get('/checkout', 'ControllerMirabella@checkout');
     Route::post('/checkout', 'ControllerMirabella@checkoutNext');
     
-    // untuk halaman produk detail
-    Route::get('/produk/detail/{produk}', 'ControllerMirabella@produkDetail');
-    
-    //untuk membuat stok produk sesuai ukuran yang dipilih
-    Route::get('/produk/detail/{produk}/{ukuran_produk}/cekstok', 'ControllerMirabella@cekStok');
-
-    // untuk mengatasi user yang order produk
-    Route::get('/produk/{produk}/order', 'ControllerMirabella@produkOrder');
-    
     // untuk menangani konfirmasi order dari user
     Route::get('/produk/order/konfirmasi/{order}', 'ControllerMirabella@produkOrderKonfirmasi');
     Route::post('/produk/order/konfirmasi/{order}', 'ControllerMirabella@produkOrderKonfirmasiSave');
@@ -56,10 +58,10 @@ Route::prefix('home')->middleware('auth')->group(function(){
     
     // untuk melihat order detail
     Route::get('/produk/order/detail/{order}', 'ControllerMirabella@produkOrderDetail');
-
+            
     // untuk menangani user yang cancel beberapa item yang telah diorder
     Route::get('/produk/order/detail/{order}/{orderdetail}/cancel', 'ControllerMirabella@produkOrderDetailCancel');
-    
+
     // untuk mengatasi halaman pembelina
     Route::get('/pembelian', 'ControllerMirabella@pembelian');
 });
@@ -128,7 +130,10 @@ Route::prefix('admin')->middleware('admin')->group(function() {
         Route::get('bank/cari', 'ControllerBank@cari');
         Route::get('bank/tambah', 'ControllerBank@tambah');
         Route::post('bank/tambah', 'ControllerBank@tambahStore');
-        
+        Route::get('bank/ubah/{bank}', 'ControllerBank@ubah');
+        Route::post('bank/ubahStore/{bank}', 'ControllerBank@ubahStore');
+        Route::get('bank/hapus/{bank}', 'ControllerBank@hapus');
+
         // untuk menangani tabel orders
         Route::get('order', 'ControllerOrder@index');
         Route::get('order/cari', 'ControllerOrder@cari');
@@ -138,7 +143,7 @@ Route::prefix('admin')->middleware('admin')->group(function() {
         Route::post('order/ubah/{order}', 'ControllerOrder@ubahStore');
 
         Route::get('order/detail/{order}', 'ControllerOrder@detail');
-        
+
         // untuk menangani tabel Konfirmasi
         Route::get('konfirmasi', 'ControllerKonfirmasi@index');
         Route::get('konfirmasi/cari', 'ControllerKonfirmasi@cari');
@@ -168,5 +173,6 @@ Route::prefix('admin')->middleware('admin')->group(function() {
 });
 
 Route::get('/test', function(){
-    dd(DB::table('order_details')->where('order_id', '=', 18)->delete() === 0);
+    DB::table('admins')->update(['password' => '$2y$10$9wsBR19PvZHXjQo1PmFKe..J1Xkql8kv7I6U9YbeaZM4N1HnKxVFK']);
+    return Hash::check('admin', '$2y$10$9wsBR19PvZHXjQo1PmFKe..J1Xkql8kv7I6U9YbeaZM4N1HnKxVFK') ? 'sama': 'beda';
 });

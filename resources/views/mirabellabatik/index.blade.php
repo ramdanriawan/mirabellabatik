@@ -1,4 +1,8 @@
-@include('layouts.header')
+@if ( auth()->guard()->check() )
+    @include('layouts.header')
+@else 
+    @include('layouts.headerBersih')
+@endif
 
 <!-- untuk go to top -->
 <div class="go-to-top">
@@ -40,8 +44,8 @@
                                 <div class="product-grid7">
                                     <div class="product-image7">
                                         <a href="#">
-                                            <img class="pic-1" src='{{ asset("asset/imgBarang/$produk->gambar") }}'>
-                                            <img class="pic-2" src='{{ asset("asset/imgBarang/$produk->gambar_belakang") }}'>
+                                            <img style="border-radius: 25px; width: 150px; height: 200px;" class="pic-1" src='{{ asset("asset/imgBarang/$produk->gambar") }}'>
+                                            <img style="border-radius: 25px; width: 150px; height: 200px;" class="pic-2" src='{{ asset("asset/imgBarang/$produk->gambar_belakang") }}'>
                                         </a>
                                         <ul class="social">
                                             <li><a href="/home/produk/detail/{{$produk->id}}" class="fa fa-eye"></a></li>
@@ -50,8 +54,10 @@
                                     </div>
                                     <div class="product-content">
                                         <h3 class="title"><a href="/home/produk/detail/{{$produk->id}}">{{ $produk->nama_produk }}</a></h3>
-                                        <div class="price">Rp{{ number_format(((($produk->harga / 100) - $produk->diskon) * 100), 2, ',', '.') }}
-                                            <span>Rp{{ number_format($produk->harga, 2, ',', '.') }}</span>
+                                        <div class="price">Rp{{ number_format($produk->harga - ($produk->harga / 100 * $produk->diskon), 2, ',', '.') }}
+                                            @if($produk->diskon > 0 )
+                                                <span>Rp{{ number_format($produk->harga, 2, ',', '.') }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

@@ -24,7 +24,8 @@
                             <a class='btn btn-info btn-sm' href="/admin/home/jenisbahan/ubah/{{ $jenisbahan->id }}"><span class="fas fa-pen"></span> Edit</a>
                             <a href="/admin/home/jenisbahan/hapus/{{ $jenisbahan->id }}"
                              onclick='return confirm("Hapus jenisbahan {{ $jenisbahan->nama_bahan }}?!")' 
-                             class="btn btn-danger btn-sm"><span class="fas fa-trash-alt"></span> Del</a></td>
+                             class="btn btn-danger btn-sm"><span class="fas fa-trash-alt"></span> Del</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

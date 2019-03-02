@@ -26,6 +26,36 @@ class ControllerMirabella extends Controller
         return view('mirabellabatik.index', $datas);
     }
 
+    public function create()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show(Mirabella $mirabella)
+    {
+        //
+    }
+
+    public function edit(Mirabella $mirabella)
+    {
+        //
+    }
+
+    public function update(Request $request, Mirabella $mirabella)
+    {
+        //
+    }
+
+    public function destroy(Mirabella $mirabella)
+    {
+        //
+    }
+
     public function produkKategori(Kategori $kategori)
     {
         $datas['produks'] = Produk::where('kategori_id', $kategori->id)->paginate(10);
@@ -48,7 +78,7 @@ class ControllerMirabella extends Controller
 
         if(count($datas['order_details']->toArray()) == 0)
         {
-            return back()->with('error', 'Belum ada item yang ditambahkan!')->withCookie(Cookie::forget('order_id'));
+            return back()->with('error', 'Belum ada item yang ditambahkan!');
         }
 
         return view('mirabellabatik.checkout', $datas);
@@ -89,9 +119,11 @@ class ControllerMirabella extends Controller
         return view('mirabellabatik.produkDetail', $datas);
     }
 
-
     public function produkOrder(Request $request, Produk $produk)
     { 
+        if ( !auth()->guard()->check() )
+        return redirect('login')->with('error', 'Please Login!');
+
         $this->validate($request, [
             'jumlah' => [function($attribute, $value, $fail) use ($request, $produk) {
                 $ukuranProduk = UkuranProduk::where('produk_id', '=', $produk->id)->where('ukuran', '=', $request->size)->get()[0];
@@ -180,7 +212,7 @@ class ControllerMirabella extends Controller
         if ( count(OrderDetail::where('order_id', '=', $order->id)->get()) < 1 )
         {
             Order::find($order->id)->delete();
-            return redirect('/home')->with('success', 'Berhasil menghapus item ' . $data['namaBarang']);
+            return redirect('/home')->with('success', 'Berhasil menghapus item ' . $data['namaBarang'])->withCookie(Cookie::forget('order_id'));
         }
 
         return back()->with('success', 'Berhasil menghapus item ' . $data['namaBarang']);
@@ -228,6 +260,11 @@ class ControllerMirabella extends Controller
     public function about()
     {
         return view('mirabellabatik.about');
+    }
+
+    public function developer()
+    {
+        return view('mirabellabatik.developer');
     }
 
 }

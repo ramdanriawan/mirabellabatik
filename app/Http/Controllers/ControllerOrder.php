@@ -6,6 +6,8 @@ use App\Pelanggan;
 use App\Kota;
 use App\Order;
 use App\OrderDetail;
+use App\Produk;
+use App\Kurir;
 
 class ControllerOrder extends Controller 
 {
@@ -52,97 +54,30 @@ class ControllerOrder extends Controller
        $datas['order'] = $order;
        $datas['pelanggans'] = pelanggan::all();
        $datas['kotas'] = Kota::all();
+       $datas['kurirs'] = Kurir::all();
        
        return view('admin.home.order.ubah', $datas);
    }
 
-   public function ubahStore(Request $request, produk $produk)
+   public function ubahStore(Request $request, order $order)
    { 
-       // tambahkan gambar_nama dan gambar_belakang_nama untuk mengecek apakah nama gambar di database sudah ada atau belum
-       $request['gambar_nama'] = $request->gambar->getClientOriginalName();
-       $request['gambar_belakang_nama'] = $request->gambar->getClientOriginalName();
-       
-        // cek dan tambahkan validasi jika user berusaha untuk merubah gambarnya
-       $gambarValidate = '';
-       if ( $request->gambar !== null )
-       {
-           if ( $request->gambar->getClientOriginalName() != $produk->gambar ) {
-                $gambarValidate = ['image', $this->gambarTidakBolehSama];
-           }
-       }
-
-      $gambar_belakangValidate = '';
-      if ( $request->gambar_belakang !== null )
-      {
-          if ( $request->gambar_belakang->getClientOriginalName() != $produk->gambar ) {
-               $gambar_belakangValidate = ['image', $this->gambarTidakBolehSama];
-          }
-      }
-
-      // validasi untuk nama produk yang tidak boleh sama didatabase jika user berusaha untuk merubah gambarnya
-      $nama_produkValidate = 'required|min:3|max:100';
-      if ( $request->nama_produk != $produk->nama_produk )
-      {
-          $nama_produkValidate = 'required|unique:produks,nama_produk|min:3|max:100';
-      }
-
         // lakukan validasi
        $this->validate($request, [
-           'kategori_id' => 'required|integer|digits_between:1,1000000',
-           'jenis_bahan_id' => 'required|integer|digits_between:1,1000000',
-           'nama_produk' => $nama_produkValidate,
-           'deskripsi' => 'required|string|max:255',
-           'harga' => 'required|integer|digits_between:4,7',
-           'stok' => 'required|integer|digits_between:1,5',
-           'berat' => 'required|integer|digits_between:1,2',
-           'gambar' => $gambarValidate,
-           'gambar_belakang' => $gambar_belakangValidate,
-           'gambar_nama' => 'unique:produks,gambar',
-           'gambar_belakang_nama' => 'unique:produks,gambar_belakang',
-           'diskon' => 'required|integer|max:100',
-           'tggl_masuk' => 'required|date',
+           'pelanggan_id' => 'required|exists:pelanggans,id',
+           'tgl_order' => 'required',
+           'alamat_pengiriman' => 'required',
+           'kota_id' => 'required|exists:kotas,id',
+           'status_order' => 'required',
+           'status_konfirmasi' => 'required',
+           'status_diterima' => 'required',
+           'kurir_id' => 'required|exists:kurirs,id',
        ]);
 
-       $this->validate($request, [
-            'gambar_nama' => 'unique:produks,gambar_belakang',
-            'gambar_belakang_nama' => 'unique:produks,gambar',
-       ]);
+        $request->except(['_token']);
+       
+       Order::find($order->id)->update($request->all());
 
-       // pindahkan gambar yang baru diupload dan hapus gambar dari uploadan sebelumnya, dan set nama yang akan disimpan ke database
-       $gambar = $produk->gambar;
-       if ( $gambarValidate != '')
-       { 
-           $gambar = $request->gambar->getClientOriginalName();
-           $request->file('gambar')->move('asset/imgBarang', $gambar);
-
-            File::delete("asset/imgBarang/$produk->gambar");
-       }
-
-       $gambar_belakang = $produk->gambar_belakang;
-       if ( $gambar_belakangValidate != '')
-       {
-           $gambar_belakang = $request->gambar_belakang->getClientOriginalName();
-           $request->file('gambar_belakang')->move('asset/imgBarang', $gambar_belakang);
-
-           File::delete("asset/imgBarang/$produk->gambar_belakang");
-       }
-
-        // update produk
-        produk::find($produk->id)->update([
-            'kategori_id' => $request->kategori_id,
-            'jenis_bahan_id' => $request->jenis_bahan_id,
-            'nama_produk' => $request->nama_produk,
-            'deskripsi' => $request->deskripsi,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'berat' => $request->berat,
-            'gambar' => $gambar,
-            'gambar_belakang' => $gambar_belakang,
-            'diskon' => $request->diskon,
-            'tggl_masuk' => $request->tggl_masuk
-        ]);
-
-        return redirect('/admin/home/produk')->with('success', 'Berhasil Mengedit produk');
+        return redirect('/admin/home/order')->with('success', 'Berhasil Mengedit Order');
    }
 
    public function cari(Request $request)

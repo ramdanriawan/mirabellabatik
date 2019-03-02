@@ -1,7 +1,7 @@
 @include('layouts.admin.header')
 
 <div class="container p-5">
-    <form class="form-horizontal" role="form" method="POST" action="/admin/home/order/tambah">
+    <form class="form-horizontal" role="form" method="POST" action="/admin/home/order/ubah/{{ $order->id }}">
     	{{ csrf_field() }}
         <div class="row">
             <div class="col-md-3"></div>
@@ -189,10 +189,37 @@
         </div>
         
         <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="name">Kurir</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa "></i></div>
+                        <select name="kurir_id" class="form-control" >
+                            @foreach($kurirs as $kurir)
+                                <option value='{{ $kurir->id }}' {{ $kurir->id == $order->kurir->id ? "selected":"" }}> {{ $kurir->nama_kurir }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            @if($errors->has('status_diterima'))
+                                <i class="text-danger"> {{ $errors->first('status_diterima') }}</i>
+                            @endif
+                        </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add</button>
-                <button type="reset" class="btn btn-warning text-white"><i class="fa fa-plus-square"></i> Reset</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+                <button type="reset" class="btn btn-warning text-white"><i class="fa fa-redo-alt"></i> Reset</button>
             </div>
         </div>
     </form>

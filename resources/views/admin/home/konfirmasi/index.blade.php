@@ -2,9 +2,9 @@
 
 <div class="container  justify-content-center d-flex py-5">
     <div class="row col-md-10">
-        <a href="/admin/home/konfirmasi/tambah" class="btn btn-primary btn-xs mr-auto"><b>+</b> Add konfirmasi</a>
-        <form action="/admin/home/konfirmasi/cari" method='get' class='ml-auto'>
-            <input type="text" class="form-control" placeholder="Nama konfirmasi..." name='q' value='{{ old("q")}}'>
+        {{-- <a href="/admin/home/konfirmasi/tambah" class="btn btn-primary btn-xs mr-auto"><b>+</b> Add konfirmasi</a> --}}
+        <form action="/admin/home/konfirmasi/cari" method='get' class='ml-auto mb-2'>
+            <input type="text" class="form-control" placeholder="Nama Pengirim..." name='q' value='{{ old("q")}}'>
         </form>
 
         <div class='table-responsive'>

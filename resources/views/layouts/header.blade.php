@@ -1,4 +1,9 @@
 
+@php 
+    $userTrollItems = $order_details2->where('order_id', '=', Cookie::get('order_id'))->get();
+    $total_harga = null;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,14 +54,12 @@
                 <div class="col-item-troll col-sm-6 pr-4 d-sm-flex justify-content-end">
                     <div class="item-troll">
                         <div class="item-troll-desc text-info">
-                        @php 
-                            $userTrollItems = $order_details2->where('order_id', '=', Cookie::get('order_id'))->get();
-                            $total_harga = null;
-                        @endphp
-                        
+
+                       
+
                             @foreach($userTrollItems as $userTrollItem)
                                 @php 
-                                    $total_harga += ((($userTrollItem->produk->harga / 100) - $userTrollItem->produk->diskon) * 100) * $userTrollItem->jumlah;
+                                    $total_harga +=  ($userTrollItem->produk->harga - ($userTrollItem->produk->harga / 100) * $userTrollItem->produk->diskon) * $userTrollItem->jumlah;
                                 @endphp
                             @endforeach
 
@@ -80,18 +83,26 @@
     
         <div class="collapse navbar-collapse" id='navbarSupportedContent'>
             <ul class="navbar-nav nav-justified w-100">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Produk</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Akun Saya
+                    </a>
+                    
+                    <div class="dropdown-menu ml-5" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/home/profile">My Profile</a>
+                        <a class="dropdown-item" href="{{ Route('logout') }}"  onclick='return confirm("Anda Akan Logout?")'>Logout</a>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/home/profile">Profil</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Produk</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/home/pembelian">Pembelian</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ Route('logout') }}"  onclick='return confirm("Anda Akan Logout?")'>Logout</a>
+                    <a href="/about" class="nav-link">Profile Toko</a>
                 </li>
+                
                 <li class="nav-item">
                     <form class="form-inline d-flex justify-content-center" action="/home/search">
                         <div class="form-group form-pencarian">

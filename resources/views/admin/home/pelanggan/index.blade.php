@@ -2,8 +2,8 @@
 
 <div class="container  justify-content-center d-flex py-5">
     <div class="row col-md-10">
-        <a href="/admin/home/pelanggan/tambah" class="btn btn-primary btn-xs mr-auto"><b>+</b> Add Pelanggan</a>
-        <form action="/admin/home/pelanggan/cari" method='get' class='ml-auto'>
+        {{-- <a href="/admin/home/pelanggan/tambah" class="btn btn-primary btn-xs mr-auto"><b>+</b> Add Pelanggan</a> --}}
+        <form action="/admin/home/pelanggan/cari" method='get' class='ml-auto mb-2'>
             <input type="text" class="form-control" placeholder="Nama Pelanggan..." name='q' value='{{ old("q")}}'>
         </form>
 

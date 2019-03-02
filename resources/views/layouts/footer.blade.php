@@ -23,7 +23,7 @@
                 <div class="col-sm-4 pl-5">
                     <h2>LINKS</h2>
                     <ul class="nav">
-                      <li class="nav-item"><a href="/about" class="text-white">About</a></li>
+                      <li class="nav-item"><a href="/developer" class="ml-2 text-white"> Developer Team</a></li>
                       <!-- <li class="nav-item"><a href="/privacy" class="text-white">&nbsp;Privacy Policy</a></li> -->
                       <!-- <li class="nav-item"><a href="" class="text-white">&nbsp;Company Info</a></li> -->
                     </ul>

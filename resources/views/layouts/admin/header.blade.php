@@ -96,9 +96,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::segment(3) == 'pelanggan' ? 'active':'' }}" href="/admin/home/pelanggan" >Pelanggan</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link {{ Request::segment(3) == 'ulasan' ? 'active':'' }}" href="/admin/home/ulasan" >Ulasan</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link {{ Request::segment(3) == 'bank' ? 'active':'' }}" href="/admin/home/bank" >Bank</a>
                 </li>

@@ -5,7 +5,7 @@
     <title>
         Laporan Barang
     </title>
-    <link href='{{ asset('asset/css/app.css') }}' rel='stylesheet' />
+    <link href='{{ asset('css/app.css') }}' rel='stylesheet' />
     <link href='{{ asset('asset/css/style.css') }}' rel='stylesheet' />
 
     {{--  font awesome --}}

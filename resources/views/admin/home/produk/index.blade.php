@@ -15,8 +15,8 @@
                         <th>Kategori</th>
                         <th>Jenis Bahan</th>
                         <th>Nama</th>
-                        <th>Deskripsi</th>
                         <th>Size</th>
+                        <th>Deskripsi</th>
                         <th>Harga</th>
                         <th>Stok</th>
                         <th>Berat</th>

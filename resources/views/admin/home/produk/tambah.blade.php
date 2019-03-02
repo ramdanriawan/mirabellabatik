@@ -348,7 +348,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add</button>
-                <button type="reset" class="btn btn-warning text-white"><i class="fa fa-redo"></i> Reset</button>
+                <button type="reset" class="btn btn-warning text-white"><i class="fa fa-redo-alt"></i> Reset</button>
             </div>
         </div>
     </form>

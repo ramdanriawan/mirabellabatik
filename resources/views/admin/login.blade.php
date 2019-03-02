@@ -1,7 +1,7 @@
 @include('layouts.headerBersih')
 
 <div class="container p-5">
-        <form class="form-horizontal" role="form" method="POST" action="/admin/login"  autocomplete='off'>
+        <form class="form-horizontal" role="form" method="POST" action="/admin/login">
         	{{ csrf_field() }}
 
             <div class="row">

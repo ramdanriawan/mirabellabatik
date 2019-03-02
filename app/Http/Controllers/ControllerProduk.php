@@ -229,7 +229,7 @@ class ControllerProduk extends Controller
             'nama_produk' => $request->nama_produk,
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
-            'stok' => $request->stokSmall + $request->stokMedium + $request->stokLarge + $request->stokXtraLarge,
+            'stok' => $request->smallStok + $request->mediumStok + $request->largeStok + $request->xtraLargeStok,
             'berat' => $request->berat,
             'gambar' => $gambar,
             'gambar_belakang' => $gambar_belakang,

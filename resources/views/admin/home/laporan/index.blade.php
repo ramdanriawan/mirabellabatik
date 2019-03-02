@@ -5,7 +5,7 @@
         <div class='col-6 offset-3'>
             <h2>Laporan Penjualan</h2>
             <form method='post' action='/admin/home/laporan/penjualan' target='_penjualan' onsubmit='window.open("", "_penjualan", "width=100");'>
-            {{ csrf_field() }}
+                @csrf
                 <div class='form-group'>
                     <label for='tggl_mulai'>Tanggal Mulai</label>
                     <input class='form-control' type='date' name='tggl_mulai' value='{{ old("tggl_mulai") }}' />

@@ -1,4 +1,8 @@
-@include('layouts.header')
+@if ( auth()->guard()->check() )
+    @include('layouts.header')
+@else 
+    @include('layouts.headerBersih')
+@endif
 
 <div class="container py-5 px-3">
 <div class="row">

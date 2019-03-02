@@ -72,7 +72,7 @@
                         <i class='fa fa-save'></i> Save
                     </button>
                     <button type='reset' class='btn btn-warning' value='Reset'>
-                        <i class='fa fa-refresh'></i> Reset
+                        <i class='fa fa fa-redo-alt'></i> Reset
                     </button>
                 </div>
             </form>
